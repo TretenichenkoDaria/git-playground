@@ -6,7 +6,7 @@ def congratulate_user():
     print("=============================")
     print("= Congratulations! You won! =")
     print("=============================")
-    print(f"Congratulations, you won! your words: {guessed}")
+    print(f"Congratulations, you won! Your words: {guessed}")
 
 
 def is_game_over():
@@ -26,11 +26,15 @@ word = words[random.randrange(0, len(words))]
 print(f"Can you make up {WORDS_TO_WIN} words from letters in word provided by me?")
 print(f"Your word is '{word}'")
 
-
+guessed_words = []
 while not is_game_over():
     guess = input("Your next take: ")
+    while guess in guessed_words:
+        guess = input(('You have entered this word already, enter again: '))
+        continue
     if guess in full_list:
         guessed += 1
+        guessed_words.append(guess)
         if guessed == WORDS_TO_WIN:
             congratulate_user()
             exit()
